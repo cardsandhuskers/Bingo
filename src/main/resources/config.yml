@@ -1,0 +1,19 @@
+world: Bingo
+#radius of world border
+radius: 250
+
+PregameTime: 30
+GameTime: 720
+PostGameTime: 30
+
+#how many teams can get each item before it locks
+numItemsObtainable: 6
+#points for 1st team
+maxPoints: 160
+#number of points lost per team completed ahead
+dropOff: 20
+
+cardItems:
+  - book_and_quill
+  - bricks
+  - campfire

@@ -1,0 +1,17 @@
+name: Bingo
+version: '${project.version}'
+main: io.github.cardsandhuskers.bingo.Bingo
+api-version: 1.19
+authors: [ cardsandhuskers ]
+description: bingo
+depend: [PlayerPoints, PlaceholderAPI, Teams]
+commands:
+  reloadBingoWorld:
+    description: reloads the world with a new seed
+    usage: /<command>
+  startBingo:
+    description: starts bingo
+    usage: /<command> [multiplier]
+  setBingoLobby:
+    description: sets the lobby location for Bingo
+    usage: /<command>
