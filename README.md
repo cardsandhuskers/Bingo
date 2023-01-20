@@ -17,7 +17,7 @@ Players are teleported to the highest non-air block at 0,0 in the bingo world (t
   **/reloadbingoworld**
     - Deletes the old bingo world and then generates a new world with a random seed (player inputted seed planned for future)
     - Uses Chunky to preload all chunks inside the worldborder
-   -  Make sure no players are in the world when you run this (it will not work otherwise)!
+    - Make sure no players are in the world when you run this (it will not work otherwise)!
   
   **/setbingolobby**
     - Sets the main lobby that the plugin will teleport all players to after the game ends to where the player is standing
