@@ -12,7 +12,7 @@ Radius is for a square that the world border encapsulates
 
 Players are teleported to the highest non-air block at 0,0 in the bingo world (this may be water and is an issue that needs to be fixed)
 
-#Commands:
+# Commands:
 
   /reloadbingoworld
     Deletes the old bingo world and then generates a new world with a random seed (player inputted seed planned for future)
