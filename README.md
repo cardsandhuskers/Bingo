@@ -24,3 +24,6 @@ Players are teleported to the highest non-air block at 0,0 in the bingo world (t
   
 **/startbingo [multiplier]**
 - Starts the bingo game. The multiplier can be any double, represents the multiplied points
+
+# Dependencies
+- Teams Plugin (https://github.com/cardsandhuskers/TeamsPlugin)
