@@ -44,7 +44,7 @@ public class BingoCard {
             int slot = (index/5 * 9) + (index%5) + 2;
             ItemStack item;
 
-            if(numLeft!= 0) item = new ItemStack(mat, numLeft);
+            if(numLeft > 0) item = new ItemStack(mat, numLeft);
             else item = new ItemStack(Material.BARRIER);
 
             ItemMeta itemMeta = item.getItemMeta();

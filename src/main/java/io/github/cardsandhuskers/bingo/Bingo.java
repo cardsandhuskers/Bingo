@@ -48,8 +48,9 @@ public final class Bingo extends JavaPlugin {
         getCommand("reloadBingoWorld").setExecutor(new ReloadWorldCommand());
         getCommand("startBingo").setExecutor(new StartGameCommand(this));
         getCommand("setBingoLobby").setExecutor(new SetLobbyCommand(this));
-        saveDefaultConfig();
+
         getConfig().options().copyDefaults(true);
+        saveDefaultConfig();
     }
 
     @Override

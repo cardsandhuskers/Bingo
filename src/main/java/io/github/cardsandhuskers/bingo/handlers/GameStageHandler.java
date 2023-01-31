@@ -74,27 +74,32 @@ public class GameStageHandler {
                     Location teleportLoc = getWorldSpawn();
                     //teleportLoc.getWorld().setSpawnLocation(teleportLoc.getBlockX(), teleportLoc.getBlockY(), teleportLoc.getBlockZ());
 
+                    int counter = 0;
                     for(Player p:Bukkit.getOnlinePlayers()) {
-                        p.teleport(teleportLoc);
-                        p.setHealth(20);
-                        p.setFoodLevel(20);
-                        p.setSaturation(20);
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, ()-> {
+                            p.teleport(teleportLoc);
+                            p.setHealth(20);
+                            p.setFoodLevel(20);
+                            p.setSaturation(20);
 
-                        Inventory inv = p.getInventory();
-                        inv.clear();
+                            Inventory inv = p.getInventory();
+                            inv.clear();
 
-                        ItemStack bingoCard = new ItemStack(Material.NETHER_STAR);
-                        ItemMeta bingoCardMeta = bingoCard.getItemMeta();
-                        bingoCardMeta.setDisplayName("Bingo Card");
-                        bingoCard.setItemMeta(bingoCardMeta);
-                        inv.setItem(8, bingoCard);
+                            ItemStack bingoCard = new ItemStack(Material.NETHER_STAR);
+                            ItemMeta bingoCardMeta = bingoCard.getItemMeta();
+                            bingoCardMeta.setDisplayName("Bingo Card");
+                            bingoCard.setItemMeta(bingoCardMeta);
+                            inv.setItem(8, bingoCard);
 
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                            if(handler.getPlayerTeam(p) != null) p.setGameMode(GameMode.ADVENTURE);
-                            else p.setGameMode(GameMode.SPECTATOR);
-                        }, 5L);
+                            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                                if(handler.getPlayerTeam(p) != null) p.setGameMode(GameMode.ADVENTURE);
+                                else p.setGameMode(GameMode.SPECTATOR);
+                            }, 5L);
 
-                        p.setBedSpawnLocation(teleportLoc, true);
+                            p.setBedSpawnLocation(teleportLoc, true);
+                        }, 20L * (counter/5));
+                        counter++;
+
                     }
 
                     teleportLoc.getWorld().setTime(1000);
@@ -208,7 +213,6 @@ public class GameStageHandler {
                 //Timer Start
                 () -> {
                     gameState = State.GAME_OVER;
-
                 },
 
                 //Timer End
@@ -217,12 +221,7 @@ public class GameStageHandler {
                     for(Player p:Bukkit.getOnlinePlayers()) {
                         p.teleport(plugin.getConfig().getLocation("lobby"));
                     }
-                    for(Player p:Bukkit.getOnlinePlayers()) {
-                        if(p.isOp()) {
-                            p.performCommand("startRound");
-                            break;
-                        }
-                    }
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "startRound");
                 },
 
                 //Each Second

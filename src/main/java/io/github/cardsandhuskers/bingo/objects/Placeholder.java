@@ -63,6 +63,7 @@ public class Placeholder extends PlaceholderExpansion {
         if(s.equalsIgnoreCase("itemsCollected")) {
             Team t = handler.getPlayerTeam((Player) p);
             if(t == null) return 0 + "";
+            if(teamItemsMap == null) return 0 + "";
             if(!teamItemsMap.containsKey(t)) {
                 return 0 + "";
             }

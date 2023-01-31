@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import static io.github.cardsandhuskers.bingo.Bingo.*;
 import static io.github.cardsandhuskers.teams.Teams.handler;
@@ -42,15 +43,36 @@ public class BingoCardHandler {
         for(Team t:handler.getTeams()) {
             teamItemsMap.put(t, new ArrayList<>());
         }
+
+
+
+        ArrayList<Material> configItems = new ArrayList<>();
         //build the cardMap
         for(String item:plugin.getConfig().getStringList("cardItems")) {
             Material mat;
             try {
                 mat = Material.valueOf(item.toUpperCase());
-                cardMap.put(mat, 0);
+                configItems.add(mat);
             } catch (Exception e) {
                 System.out.println("Cannot recognize " + item + " as an item type");
             }
+        }
+
+
+        int max = 25;
+        if(configItems.size() < 25) max = configItems.size();
+
+        ArrayList<Material> finalList = new ArrayList<>();
+        for(int i = 1; i <= max; i++) {
+            Random random = new Random();
+            int item = random.nextInt(configItems.size());
+            finalList.add(configItems.get(item));
+            configItems.remove(item);
+        }
+
+
+        for(Material mat:finalList) {
+            cardMap.put(mat, 0);
         }
     }
 
@@ -66,7 +88,7 @@ public class BingoCardHandler {
         int numItems = plugin.getConfig().getInt("numItemsObtainable");
         int points;
 
-        if(cardMap.get(mat) == numItems + 1) points = 0;
+        if(cardMap.get(mat) >= numItems + 1) points = 0;
         else points = maxPoints - (dropOff * (cardMap.get(mat) - 1));
 
         if(points == 0) {
@@ -78,9 +100,7 @@ public class BingoCardHandler {
                     case 1: placement = "1st"; break;
                     case 2: placement = "2nd"; break;
                     case 3: placement = "3rd"; break;
-                    case 4: placement = "4th"; break;
-                    case 5: placement = "5th"; break;
-                    default: placement = "6th"; break;
+                    default: placement = cardMap.get(mat) + "th"; break;
                 }
                 placement += " place";
                 if (handler.getPlayerTeam(p) != null && handler.getPlayerTeam(p).equals(t)) {
@@ -94,8 +114,9 @@ public class BingoCardHandler {
                 }
                 p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             }
-            ppAPI.give(player.getUniqueId(), points);
-            t.addTempPoints(player, points);
+            //ppAPI assignments have been moved to take place at the very end of the game
+            //ppAPI.give(player.getUniqueId(), (int) (points * multiplier));
+            t.addTempPoints(player, points * multiplier);
         }
         updateCards();
     }
