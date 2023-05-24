@@ -51,7 +51,8 @@ public class GameStageHandler {
     }
     public Location getWorldSpawn() {
         World world = getServer().getWorld(plugin.getConfig().getString("world"));
-        Location testLoc = new Location(world, 0, 200, 0);
+        Location spawnLoc = world.getSpawnLocation();
+        Location testLoc = new Location(world, spawnLoc.getX(), 200, spawnLoc.getZ());
         while(testLoc.getBlock().getType() == Material.AIR) {
             testLoc.setY(testLoc.getY() - 1);
         }
@@ -104,7 +105,11 @@ public class GameStageHandler {
 
                     teleportLoc.getWorld().setTime(1000);
                     teleportLoc.getWorld().setClearWeatherDuration(24000);
-                    worldBorder.setCenter(0,0);
+
+
+                    World world = getServer().getWorld(plugin.getConfig().getString("world"));
+                    Location spawn = world.getSpawnLocation();
+                    worldBorder.setCenter(spawn.getX(),spawn.getZ());
                     worldBorder.setSize(25);
 
                 },

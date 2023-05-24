@@ -19,7 +19,7 @@ public class WorldResetHandler {
         this.plugin = plugin;
     }
 
-    public void resetWorld() {
+    public void resetWorld(Long seed) {
         Server server = Bukkit.getServer();
         World world = server.getWorld(plugin.getConfig().getString("world"));
         String worldName = world.getName();
@@ -39,8 +39,10 @@ public class WorldResetHandler {
         }
 
         WorldCreator creator = new WorldCreator(worldName);
-        Random random = new Random();
-        long seed = random.nextLong();
+        if(seed == -1) {
+            Random random = new Random();
+            seed = random.nextLong();
+        }
         creator.seed(seed);
         world = server.createWorld(creator);
         world.setGameRule(GameRule.KEEP_INVENTORY, true);

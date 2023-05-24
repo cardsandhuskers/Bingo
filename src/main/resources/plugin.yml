@@ -4,7 +4,7 @@ main: io.github.cardsandhuskers.bingo.Bingo
 api-version: 1.19
 authors: [ cardsandhuskers ]
 description: bingo
-depend: [PlayerPoints, PlaceholderAPI, Teams]
+depend: [PlaceholderAPI, Teams]
 commands:
   reloadBingoWorld:
     description: reloads the world with a new seed
