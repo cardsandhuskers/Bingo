@@ -5,6 +5,7 @@ api-version: 1.19
 authors: [ cardsandhuskers ]
 description: bingo
 depend: [PlaceholderAPI, Teams]
+softdepend: [Multiverse-Core]
 commands:
   reloadBingoWorld:
     description: reloads the world with a new seed
