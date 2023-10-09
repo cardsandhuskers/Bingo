@@ -17,7 +17,17 @@ public class SurfaceCommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
-
+    /**
+     * Allows users to teleport to the surface of the world during bingo. 
+     * Command can only be executed while a bingo game is successful
+     * 
+     * @param sender : person who calls command
+     * @param command
+     * @param label
+     * @param args
+     * 
+     * @returns boolean : if command was successfully executed
+     */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
