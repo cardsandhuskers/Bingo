@@ -11,7 +11,7 @@ You can specify the number of teams that are allowed to earn points for crafting
 Radius is for a square that the world border encapsulates
 
 Players are teleported to the highest non-air block at 0,0 in the bingo world (this may be water and is an issue that needs to be fixed)
-
+kv
 # Commands:
 
 **/reloadbingoworld**
@@ -27,3 +27,17 @@ Players are teleported to the highest non-air block at 0,0 in the bingo world (t
 
 # Dependencies
 - Teams Plugin (https://github.com/cardsandhuskers/TeamsPlugin)
+
+## Compilation 
+
+Download the teams plugin and set Dfile to the location of the jar file
+
+```
+mvn install:install-file -Dfile="TeamsPlugin.jar" -DgroupId=io.github.cardsandhuskers -DartifactId=Teams -Dversion=1.0-SNAPSHOT -Dpackaging=jar -DgeneratePom=true
+```
+
+Once the neccessary project has been established, type:
+
+```
+mvn package
+```
