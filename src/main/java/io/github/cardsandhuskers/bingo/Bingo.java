@@ -3,6 +3,7 @@ package io.github.cardsandhuskers.bingo;
 import io.github.cardsandhuskers.bingo.commands.ReloadWorldCommand;
 import io.github.cardsandhuskers.bingo.commands.SetLobbyCommand;
 import io.github.cardsandhuskers.bingo.commands.StartGameCommand;
+import io.github.cardsandhuskers.bingo.commands.SurfaceCommand;
 import io.github.cardsandhuskers.bingo.objects.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -38,6 +39,7 @@ public final class Bingo extends JavaPlugin {
         getCommand("reloadBingoWorld").setExecutor(new ReloadWorldCommand());
         getCommand("startBingo").setExecutor(new StartGameCommand(this));
         getCommand("setBingoLobby").setExecutor(new SetLobbyCommand(this));
+        getCommand("surface").setExecutor(new SurfaceCommand(this));
 
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
