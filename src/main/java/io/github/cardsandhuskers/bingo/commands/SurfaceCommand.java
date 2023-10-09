@@ -2,6 +2,7 @@ package io.github.cardsandhuskers.bingo.commands;
 
 import io.github.cardsandhuskers.bingo.Bingo;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,34 +20,35 @@ public class SurfaceCommand implements CommandExecutor {
 
     /**
      * Allows users to teleport to the surface of the world during bingo. 
-     * Command can only be executed while a bingo game is successful
+     * Command can only be executed while a bingo game is active.
      * 
-     * @param sender : person who calls command
-     * @param command
-     * @param label
-     * @param args
+     * @param sender : command source/caller
+     * @param command : command that was executed
+     * @param label : alias of command
+     * @param args : command arguments
      * 
      * @returns boolean : if command was successfully executed
      */
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-
-        if(sender instanceof Player p  && Bingo.gameState == Bingo.State.GAME_ACTIVE) {
+        if(Bingo.gameState != Bingo.State.GAME_ACTIVE) {
+            System.out.println("ERROR: must run command during bingo.");
+        } else if(sender instanceof Player p) {
             Location location = p.getLocation();
             World w = p.getWorld();
 
-            // Block block = w.getHighestBlockAt((int)location.getX(), (int)location.getZ());
             Block block = w.getHighestBlockAt(location);
 
-            // Location teleportLocation = new Location(w, location.getX(), (double) block.getY() + 1, location.getZ());
+            /*DEBUG */
+            // System.out.println("DEBUG: Highest block type: " + block.getType());
 
+            //checking if highest block is air
+            if(block.getType() == Material.AIR) return false;
 
+            //updating y coordinate (height)
             location.setY((double) block.getY() + 1);
             
-
-            return p.teleport(teleportLocation);
-
-            
+            return p.teleport(location);
         } else {
             System.out.println("ERROR: cannot run from console.");
         }
