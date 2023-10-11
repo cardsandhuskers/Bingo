@@ -25,6 +25,9 @@ kv
 **/startbingo [multiplier]**
 - Starts the bingo game. The multiplier can be any double, represents the multiplied points
 
+**/top**
+- Sends user to the surface when under ground or underwater. 
+
 # Dependencies
 - Teams Plugin (https://github.com/cardsandhuskers/TeamsPlugin)
 

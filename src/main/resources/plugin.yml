@@ -16,3 +16,6 @@ commands:
   setBingoLobby:
     description: sets the lobby location for Bingo
     usage: /<command>
+  top:
+    description: moves player to surface of world
+    usage: /<command>
