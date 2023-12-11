@@ -26,7 +26,7 @@ kv
 - Starts the bingo game. The multiplier can be any double, represents the multiplied points
 
 # Dependencies
-- Teams Plugin (https://github.com/cardsandhuskers/TeamsPlugin)
+- [Teams Plugin](https://github.com/cardsandhuskers/TeamsPlugin)
 
 ## Compilation 
 
