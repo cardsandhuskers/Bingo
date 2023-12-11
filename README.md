@@ -29,7 +29,7 @@ kv
 - Sends user to the surface when under ground or underwater. 
 
 # Dependencies
-- Teams Plugin (https://github.com/cardsandhuskers/TeamsPlugin)
+- [Teams Plugin](https://github.com/cardsandhuskers/TeamsPlugin)
 
 ## Compilation 
 
