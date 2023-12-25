@@ -1,10 +1,13 @@
 package io.github.cardsandhuskers.bingo.handlers;
 
 import io.github.cardsandhuskers.bingo.Bingo;
+import io.github.cardsandhuskers.bingo.Bingo.State;
 import io.github.cardsandhuskers.bingo.listeners.*;
 import io.github.cardsandhuskers.bingo.objects.Countdown;
 import io.github.cardsandhuskers.teams.objects.Team;
 import io.github.cardsandhuskers.teams.objects.TempPointsHolder;
+import io.github.cardsandhuskers.bingo.objects.Stats;
+
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -26,13 +29,15 @@ import static org.bukkit.Bukkit.*;
 public class GameStageHandler {
     private Bingo plugin;
     private WorldBorder worldBorder;
+    private Stats stats;
 
-    public GameStageHandler(Bingo plugin) {
+    public GameStageHandler(Bingo plugin, Stats stats) {
         this.plugin = plugin;
+        this.stats = stats;
     }
 
     public void startGame() {
-        BingoCardHandler bingoCardHandler = new BingoCardHandler(plugin);
+        BingoCardHandler bingoCardHandler = new BingoCardHandler(plugin,stats);
         bingoCardHandler.initializeMaps();
         worldBorder = getWorld(plugin.getConfig().getString("world")).getWorldBorder();
 
@@ -218,6 +223,15 @@ public class GameStageHandler {
                 //Timer Start
                 () -> {
                     gameState = State.GAME_OVER;
+                    int eventNum = -1;
+                    try {
+                        eventNum = Bukkit.getPluginManager().getPlugin("LobbyPlugin")
+                            .getConfig().getInt("eventNum");
+                    }   catch (Exception e) 
+                        {eventNum = 1;}
+                        
+                    String fileName = "bingoStats" + Integer.toString(eventNum);
+                    stats.writeToFile(plugin.getDataFolder().toPath().toString(), fileName);
                 },
 
                 //Timer End

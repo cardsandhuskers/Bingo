@@ -1,6 +1,7 @@
 package io.github.cardsandhuskers.bingo.handlers;
 
 import io.github.cardsandhuskers.bingo.Bingo;
+import io.github.cardsandhuskers.bingo.Bingo.State;
 import io.github.cardsandhuskers.bingo.objects.BingoCard;
 import io.github.cardsandhuskers.teams.objects.Team;
 import org.bukkit.Bukkit;
@@ -16,6 +17,7 @@ import java.util.Random;
 
 import static io.github.cardsandhuskers.bingo.Bingo.*;
 import static io.github.cardsandhuskers.teams.Teams.handler;
+import io.github.cardsandhuskers.bingo.objects.Stats;
 
 public class BingoCardHandler {
     //lists each team and their items
@@ -25,10 +27,12 @@ public class BingoCardHandler {
     private Bingo plugin;
     //list of cards
     private ArrayList<BingoCard> openCards;
+    private Stats stats;
 
-    public BingoCardHandler(Bingo plugin) {
+    public BingoCardHandler(Bingo plugin, Stats stats) {
         this.plugin = plugin;
         openCards = new ArrayList<>();
+        this.stats = stats;
     }
 
     /**
@@ -93,6 +97,9 @@ public class BingoCardHandler {
 
         if(points == 0) {
             Bukkit.broadcastMessage(t.color + t.getTeamName() + ChatColor.GRAY + " has collected the " + ChatColor.BOLD + mat.name() + ChatColor.RESET + ChatColor.GRAY + " but gets no points :(");
+            //Player,Team,Item,itemFinish,Time
+            String lineEntry = player.getName() + "," + t.getTeamName() + "," + mat.name() + "," + "NoPoints" + "," + Bingo.timeVar;
+            stats.addEntry(lineEntry);
         } else {
             for (Player p : Bukkit.getOnlinePlayers()) {
                 String placement;
@@ -113,6 +120,9 @@ public class BingoCardHandler {
                             ChatColor.GREEN + " in " + placement + ".");
                 }
                 p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                String lineEntry = player.getName() + "," + t.getTeamName() + "," + mat.name() + "," + placement + "," + Bingo.timeVar;
+                stats.addEntry(lineEntry);
+
             }
             //ppAPI assignments have been moved to take place at the very end of the game
             //ppAPI.give(player.getUniqueId(), (int) (points * multiplier));

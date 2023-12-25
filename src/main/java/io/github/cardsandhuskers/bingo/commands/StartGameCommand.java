@@ -2,6 +2,7 @@ package io.github.cardsandhuskers.bingo.commands;
 
 import io.github.cardsandhuskers.bingo.Bingo;
 import io.github.cardsandhuskers.bingo.handlers.GameStageHandler;
+import io.github.cardsandhuskers.bingo.objects.Stats;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,8 +12,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class StartGameCommand implements CommandExecutor {
     Bingo plugin;
+    private Stats stats;
+
     public StartGameCommand(Bingo plugin) {
         this.plugin = plugin;
+        this.stats = new Stats("Player,Team,Item,itemFinish,Time");
     }
 
     @Override
@@ -45,7 +49,7 @@ public class StartGameCommand implements CommandExecutor {
     }
 
     public void startGame() {
-        GameStageHandler gameStageHandler = new GameStageHandler(plugin);
+        GameStageHandler gameStageHandler = new GameStageHandler(plugin,stats);
         gameStageHandler.startGame();
     }
 }
