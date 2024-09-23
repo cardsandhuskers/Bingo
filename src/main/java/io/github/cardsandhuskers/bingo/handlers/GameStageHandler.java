@@ -50,6 +50,7 @@ public class GameStageHandler {
         getServer().getPluginManager().registerEvents(new InventoryCloseListener(bingoCardHandler), plugin);
         getServer().getPluginManager().registerEvents(new ItemPickupListener(bingoCardHandler), plugin);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(plugin, this), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerRespawnListener(plugin), plugin);
 
 
         pregameTimer();

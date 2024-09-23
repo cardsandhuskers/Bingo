@@ -120,10 +120,10 @@ public class BingoCardHandler {
                             ChatColor.GREEN + " in " + placement + ".");
                 }
                 p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-                String lineEntry = player.getName() + "," + t.getTeamName() + "," + mat.name() + "," + placement + "," + Bingo.timeVar;
-                stats.addEntry(lineEntry);
 
             }
+            String lineEntry = player.getName() + "," + t.getTeamName() + "," + mat.name() + "," + cardMap.get(mat) + "," + Bingo.timeVar;
+            stats.addEntry(lineEntry);
             //ppAPI assignments have been moved to take place at the very end of the game
             //ppAPI.give(player.getUniqueId(), (int) (points * multiplier));
             t.addTempPoints(player, points * multiplier);
